@@ -10,7 +10,7 @@
         #ytvideo {
             position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto;
             transform: translateX(-50%) translateY(-50%); z-index: 0;
-            filter: brightness(0.7) hue-rotate(330deg) saturate(2); /* Kırmızı cehennem filtresi */
+            filter: brightness(0.7) hue-rotate(330deg) saturate(2);
         }
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
@@ -51,7 +51,6 @@
 </head>
 <body>
 
-    <!-- Senin YouTube videosu – loop, ses kapalı, fullscreen -->
     <iframe id="ytvideo" src="https://www.youtube.com/embed/heXnc8XUNw4?autoplay=1&mute=1&loop=1&playlist=heXnc8XUNw4&controls=0&modestbranding=1&rel=0" 
             allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -59,7 +58,6 @@
         <h1>300CAIN</h1>
         <div class="btn" id="btn">ŞARKI İÇİN DOKUN 😈</div>
 
-        <!-- Spotify player -->
         <iframe id="player" src="https://open.spotify.com/embed/track/3hOaMUSbw3H4RYFJ6w7F8R?utm_source=generator&theme=0" 
                 width="100%" height="352" frameborder="0" allow="autoplay; encrypted-media"></iframe>
     </div>
@@ -70,11 +68,10 @@
         const overlay = document.querySelector('.overlay');
 
         btn.onclick = function() {
-            btn.remove(); // Buton yok olur
-            player.classList.add('active'); // Spotify açılır
+            btn.remove();
+            player.classList.add('active');
             overlay.style.background = 'rgba(50,0,0,0.7)';
             document.getElementById('ytvideo').style.filter = 'brightness(1) hue-rotate(0deg) saturate(1.5)';
-            // Ekstra kaos: H1'i daha fazla salla
             document.querySelector('h1').style.animation = 'shake 0.2s infinite';
         }
     </script>
