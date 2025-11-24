@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>300CAIN</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#ff0000;font-family:Courier New,monospace;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden}
-h1{font-size:8rem;letter-spacing:15px;text-shadow:0 0 60px #ff0000;animation:g 1s infinite alternate}
-@keyframes g{from{text-shadow:0 0 50px #ff0000}to{text-shadow:0 0 120px #ff0000,0 0 180px #800000}}
-.b{font-size:4rem;padding:50px 120px;border:8px double #ff0000;background:transparent;color:#ff0000;cursor:pointer;letter-spacing:20px}
-.b:hover{transform:scale(1.5);background:#ff0000;color:#000;box-shadow:0 0 140px #ff0000}
-@media(max-width:768px){h1{font-size:4.5rem}.b{font-size:2.5rem;padding:30px 60px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300CAIN</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #ff0000; font-family: 'Courier New', monospace; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+        h1 { font-size: 8rem; letter-spacing: 15px; text-shadow: 0 0 60px #ff0000; animation: glow 1s infinite alternate; }
+        @keyframes glow { from { text-shadow: 0 0 50px #ff0000; } to { text-shadow: 0 0 120px #ff0000, 0 0 180px #800000; } }
+        .btn { font-size: 4rem; padding: 50px 120px; border: 8px double #ff0000; background: transparent; color: #ff0000; cursor: pointer; letter-spacing: 20px; transition: 1s; text-transform: uppercase; }
+        .btn:hover { transform: scale(1.5); background: #ff0000; color: #000; box-shadow: 0 0 140px #ff0000; }
+        #spotify { margin-top: 50px; width: 90%; max-width: 600px; border-radius: 10px; display: none; }
+        body.playing { background: radial-gradient(circle, #440000, #000); }
+        @media (max-width: 768px) { h1 { font-size: 4.5rem; } .btn { font-size: 2.5rem; padding: 30px 60px; } }
+    </style>
 </head>
 <body>
-<h1>300CAIN</h1>
-<div class="b" id="b">ŞARKI İÇİN DOKUN 😈</div>
+    <h1>300CAIN</h1>
+    <div class="btn" onclick="playSong()">ŞARKI İÇİN DOKUN 😈</div>
 
-<iframe id="s" src="https://open.spotify.com/embed/track/3hOaMUSbw3H4RYFJ6w7F8R?utm_source=generator&theme=0" 
-        width="90%" height="352" frameborder="0" allow="autoplay; encrypted-media" style="display:none;margin-top:40px;border-radius:12px"></iframe>
+    <iframe id="spotify" src="https://open.spotify.com/embed/track/3hOaMUSbw3H4RYFJ6w7F8R?utm_source=generator&theme=0" 
+            width="100%" height="352" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
-<script>
-document.getElementById('b').onclick=()=>{
-  document.getElementById('b').remove();
-  document.getElementById('s').style.display='block';
-  document.body.style.background='radial-gradient(circle,#440000,#000)';
-}
-</script>
+    <script>
+        function playSong() {
+            document.querySelector('.btn').remove();
+            const player = document.getElementById('spotify');
+            player.style.display = 'block';
+            document.body.classList.add('playing');
+            // Spotify'yi tetikle (tarayıcı izniyle)
+            setTimeout(() => {
+                player.contentWindow.postMessage('{"command":"play"}', '*');
+            }, 500);
+        }
+    </script>
 </body>
 </html>
